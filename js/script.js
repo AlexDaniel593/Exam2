@@ -66,6 +66,29 @@ function searchBooks() {
     }
 }
 
+// Reservar libro
+function reserveBook(bookId) {
+    const book = books.find(b => b.id === bookId);
+    if (book) {
+        book.available = false;
+        borrowedBooks.push(book);
+        addNotification(`${book.title} reservado con éxito.`);
+        setTimeout(() => addNotification(`Recordatorio: Devuelve el libro ${book.title}.`), 5000); // Recordatorio a los 5 segundos
+        displayBooks();
+    }
+}
+
+// Devolver libro
+function returnBook(bookId) {
+    const bookIndex = borrowedBooks.findIndex(b => b.id === bookId);
+    if (bookIndex !== -1) {
+        const book = borrowedBooks.splice(bookIndex, 1)[0];
+        book.available = true;
+        addNotification(`${book.title} devuelto con éxito.`);
+        displayBooks();
+    }
+}
+
 
 
 
