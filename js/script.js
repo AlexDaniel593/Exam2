@@ -90,5 +90,17 @@ function returnBook(bookId) {
 }
 
 
+// Añadir notificación
+function addNotification(message) {
+    notifications.push(message);
+    const notificationDiv = document.getElementById("notifications");
+    notificationDiv.innerHTML += <div>${message}</div>;
+
+    setTimeout(() => {
+        notificationDiv.innerHTML = notificationDiv.innerHTML.replace(<div>${message}</div>, '');
+    }, 10000); // Eliminar notificación después de 10 segundos
+}
+
+
 
 
