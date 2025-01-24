@@ -20,7 +20,7 @@ function displayBooks() {
         bookDiv.className = "book";
 
         const bookInfo = document.createElement("span");
-        bookInfo.className = book.available ? "available" : "borrowed";
+        bookInfo.className = book.available ? "available" : "borrowed";S
         bookInfo.textContent = `${book.title} - ${book.author} (${book.genre})`;
 
         const actionButton = document.createElement("button");
@@ -35,6 +35,34 @@ function displayBooks() {
 
         bookDiv.appendChild(bookInfo);
         bookDiv.appendChild(actionButton);
+        bookList.appendChild(bookDiv);
+    }
+}
+
+
+// Buscar libros
+function searchBooks() {
+    const query = document.getElementById("search").value.toLowerCase();
+    const filteredBooks = books.filter(book =>
+        book.title.toLowerCase().includes(query) ||
+        book.author.toLowerCase().includes(query) ||
+        book.genre.toLowerCase().includes(query)
+    );
+
+    const bookList = document.getElementById("book-list");
+    bookList.innerHTML = ''; // Limpiar contenido previo
+
+    for (let i = 0; i < filteredBooks.length; i++) {
+        const book = filteredBooks[i];
+
+        const bookDiv = document.createElement("div");
+        bookDiv.className = "book";
+
+        const bookInfo = document.createElement("span");
+        bookInfo.className = book.available ? "available" : "borrowed";
+        bookInfo.textContent = `${book.title} - ${book.author} (${book.genre})`;
+
+        bookDiv.appendChild(bookInfo);
         bookList.appendChild(bookDiv);
     }
 }
