@@ -9,11 +9,32 @@ const borrowedBooks = [];
 const notifications = [];
 
 // Mostrar lista de libros
-function mostrarLibros() {
-    let text = '';
-    for (const book of books) {
-        text += `ID: ${book.id} <br> Title: ${book.title} <br> Author: ${book.author} <br> Genre: ${book.genre} <br> Available: ${book.available} <br><br>`;
-    }
-    document.getElementById('book-list').innerHTML = text;
-}
+function displayBooks() {
+    const bookList = document.getElementById("book-list");
+    bookList.innerHTML = ''; // Limpiar contenido previo
 
+    for (let i = 0; i < books.length; i++) {
+        const book = books[i];
+
+        const bookDiv = document.createElement("div");
+        bookDiv.className = "book";
+
+        const bookInfo = document.createElement("span");
+        bookInfo.className = book.available ? "available" : "borrowed";
+        bookInfo.textContent = `${book.title} - ${book.author} (${book.genre})`;
+
+        const actionButton = document.createElement("button");
+        actionButton.textContent = book.available ? "Reservar" : "Devolver";
+        actionButton.onclick = function () {
+            if (book.available) {
+                reserveBook(book.id);
+            } else {
+                returnBook(book.id);
+            }
+        };
+
+        bookDiv.appendChild(bookInfo);
+        bookDiv.appendChild(actionButton);
+        bookList.appendChild(bookDiv);
+    }
+}
