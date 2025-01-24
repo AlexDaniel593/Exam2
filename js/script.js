@@ -20,7 +20,7 @@ function displayBooks() {
         bookDiv.className = "book";
 
         const bookInfo = document.createElement("span");
-        bookInfo.className = book.available ? "available" : "borrowed";
+        bookInfo.className = book.available ? "available" : "borrowed";S
         bookInfo.textContent = `${book.title} - ${book.author} (${book.genre})`;
 
         const actionButton = document.createElement("button");
